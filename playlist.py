@@ -17,7 +17,11 @@ class Playlist:
     @name.setter
     def name(self, new_name):
         self.__name = new_name
+
     @property
     def song(self):
         return self.__song
 
+    def delete_song(self):
+        wanted_date = input("Please input wanted song name: ")
+        self.__database.delete_song(self, wanted_date)
