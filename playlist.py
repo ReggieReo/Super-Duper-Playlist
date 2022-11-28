@@ -7,7 +7,7 @@ class Playlist:
     def __init__(self, name: str, song: ["Song"], database: "Playlistdb"):
         self.__name = name
         self.__song = song
-        self.database = database
+        self.__database = database
         database.initialize(self)
 
     @property

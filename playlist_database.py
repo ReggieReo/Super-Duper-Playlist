@@ -24,8 +24,7 @@ class Playlistdb:
                 playlist_db = json.load(data_file)
         except (FileNotFoundError, ValueError):
             with open("playlists.json", "w") as data_file:
-                playlist_db = {"playlist_name": self.make_song_dicts(playlist)}
-                json.dump(playlist_db, data_file, indent=4)
+                json.dump(new_data, data_file, indent=4)
         else:
             playlist_db.update(new_data)
             with open("playlists.json", "w") as data_file:
