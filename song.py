@@ -1,14 +1,13 @@
 class Song:
 
-    def __init__(self, name: str, artist: str, duration: str, language: str,
-                 url: str, rating: float, cover: str):
+    def __init__(self, name: str, artist: str, duration: str,
+                 language: str = "None", url: str = "None"):
         self.__name = name
         self.__artist = artist
         self.__duration = duration
         self.__language = language
         self.__url = url
-        self.__rating = rating
-        self.__cover = cover
+        self.__rating = 0
 
     @property
     def name(self):
