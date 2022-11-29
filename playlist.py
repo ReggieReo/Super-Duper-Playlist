@@ -59,7 +59,7 @@ class Playlist:
             if isinstance(language, str):
                 if language == "":
                     language = "None"
-                    break
+                break
             print("Language must be string, Please Try again")
             continue
         while True:
@@ -67,7 +67,7 @@ class Playlist:
             if isinstance(url, str):
                 if url == "":
                     url = "None"
-                    break
+                break
             print("url must be string")
             continue
         new_song = Song(song_name, artist, duration, language, url)
