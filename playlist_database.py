@@ -53,3 +53,13 @@ class Playlistdb:
             print(f"{song_name} is deleted")
         except KeyError:
             print(f"{song_name} doesn't exist")
+
+    @staticmethod
+    def get_playlist_name():
+        try:
+            with open("playlists.json", "r") as data_file:
+                data_file = json.load(data_file)
+        except FileNotFoundError:
+            print("Playlist file are not created yet")
+        else:
+            return data_file
