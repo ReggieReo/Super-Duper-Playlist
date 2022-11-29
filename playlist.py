@@ -1,5 +1,8 @@
 from song import Song
 from playlist_database import Playlistdb
+from display import Display
+from youtube_search import YoutubeSearch
+import random
 
 
 class Playlist:
@@ -82,7 +85,16 @@ class Playlist:
             print(f"{new_song.name} isn't added to {self.__name}")
             pass
 
+    def auto_add_song(self):
+        user_input = input("Please input song's name: ")
+        results = YoutubeSearch(user_input, max_results=3).to_dict()
+        Display().draw_songs_table_youtube(results)
+
     def delete_all_songs(self):
         self.__song = []
         self.__database.initialize(self)
         print("All songs are deleted")
+
+    def shuffle_songs(self):
+        random.shuffle(self.__song)
+        self.__database.initialize(self)

@@ -22,7 +22,7 @@ class Playlistdb:
         try:
             with open("playlists.json", "r") as data_file:
                 playlist_db = json.load(data_file)
-        except (FileNotFoundError, ValueError):
+        except (FileNotFoundError, json.JSONDecodeError):
             with open("playlists.json", "w") as data_file:
                 json.dump(new_data, data_file, indent=4)
         else:
@@ -53,6 +53,3 @@ class Playlistdb:
             print(f"{song_name} is deleted")
         except KeyError:
             print(f"{song_name} doesn't exist")
-
-
-

@@ -68,13 +68,3 @@ class Song:
         if not isinstance(new_rating, float):
             raise TypeError("rating of song must be float type")
         self.__rating = new_rating
-
-    @property
-    def cover(self):
-        return self.__cover
-
-    @cover.setter
-    def cover(self, new_cover):
-        if not isinstance(new_cover, str):
-            raise TypeError("cover of song must be float type")
-        self.__cover = new_cover
