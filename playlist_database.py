@@ -55,7 +55,7 @@ class Playlistdb:
             print(f"{song_name} doesn't exist")
 
     @staticmethod
-    def get_playlist_name():
+    def get_playlist_info():
         try:
             with open("playlists.json", "r") as data_file:
                 data_file = json.load(data_file)
