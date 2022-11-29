@@ -8,10 +8,9 @@ from display import Display
 
 class Playlist:
 
-    def __init__(self, name: str, song: ["Song"], database: "Playlistdb",
-                 display: "Display" = Display()):
+    def __init__(self, name: str, database: "Playlistdb", display: "Display"):
         self.__name = name
-        self.__song = song
+        self.__song = []
         self.__database = database
         self.__display = display
         database.initialize(self)
@@ -27,6 +26,10 @@ class Playlist:
     @property
     def song(self):
         return self.__song
+
+    @property
+    def display(self):
+        return self.__display
 
     def delete_song(self):
         wanted_date = input("Please input wanted song name: ")
