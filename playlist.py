@@ -8,9 +8,10 @@ from display import Display
 
 class Playlist:
 
-    def __init__(self, name: str, database: "Playlistdb", display: "Display"):
+    def __init__(self, name: str, database: "Playlistdb", display: "Display",
+                 song: "Song" = []):
         self.__name = name
-        self.__song = []
+        self.__song = song
         self.__database = database
         self.__display = display
         database.initialize(self)
@@ -71,13 +72,17 @@ class Playlist:
             print("url must be string")
             continue
         new_song = Song(song_name, artist, duration, language, url)
+        self.__display.clear_screen()
+        self.__display.draw_one_song(new_song)
         user_input = input("Press enter to confirm: ")
         if user_input == "":
             self.__song.append(new_song)
             self.__database.initialize(self)
             print(f"{new_song.name} is added to {self.__name}")
+            input("Press enter to continue: ")
         else:
             print(f"{new_song.name} isn't added to {self.__name}")
+            input("Press enter to continue: ")
 
     def auto_add_song(self):
         while True:

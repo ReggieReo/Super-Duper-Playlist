@@ -13,20 +13,17 @@ def read_first_menu():
 
 
 def read_wanted_playlist():
-    nums_playlist = len(DATA.get_playlist_info())
+    names_playlist = DATA.get_playlist_info()
     while True:
         try:
-            user_input = int(input("Please choose a wanted playlist: "))
-        except ValueError:
-            print("A wanted playlist must be int")
+            playlist_name = input("Please choose a wanted playlist: ")
+            wanted_names_playlist = names_playlist[playlist_name]
+        except KeyError:
+            print("The playlist doesn't exist")
         else:
-            if 0 < user_input < nums_playlist + 1:
-                return user_input
-            print("Please choose existing playlist: ")
+            return playlist_name, wanted_names_playlist
 
-
-
-def main():
+def first_menu():
     while True:
         DISPLAY.draw_first_menu()
         user_input = read_first_menu()
@@ -40,8 +37,19 @@ def main():
             DISPLAY.clear_screen()
             playlist_info = DATA.get_playlist_info()
             DISPLAY.draw_all_playlist(playlist_info)
-            read_wanted_playlist()
+            playlist_name, playlist_songs = read_wanted_playlist()
+            song_list = []
+            for songs_name, song_info in playlist_songs.items():
+                temp_song = Song(songs_name,
+                                 song_info["artist"],
+                                 song_info["duration"],
+                                 song_info["language"],
+                                 song_info["url"])
+                temp_song.rating = float(song_info["rating"])
+                song_list.append(temp_song)
+            opened_playlist = Playlist(playlist_name, DATA, DISPLAY, song_list)
             DISPLAY.clear_screen()
+            break
         if user_input == "3":
             DISPLAY.clear_screen()
             playlist_name = input("Please insert playlist's name: ")
@@ -63,7 +71,14 @@ def main():
                     input("Press enter to continue: ")
                     break
                 DISPLAY.clear_screen()
+    return opened_playlist
+
+def main():
+    openned_playlist = first_menu()
+
 
 
 if __name__ == "__main__":
+    playlist1 = Playlist("playlist1", DATA, DISPLAY, [Song("17", "dept", "3:21"), Song("18", "Dept", "3:40")])
+    playlist2 = Playlist("playlist2", DATA, DISPLAY, [Song("Plastic love", "Maliya", "4:53")])
     main()
