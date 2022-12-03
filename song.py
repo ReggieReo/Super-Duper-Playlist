@@ -65,6 +65,8 @@ class Song:
 
     @rating.setter
     def rating(self, new_rating):
-        if not isinstance(new_rating, float):
+        if not isinstance(new_rating, float) or \
+                new_rating < 0 or \
+                new_rating > 5:
             raise TypeError("rating of song must be float type")
         self.__rating = new_rating
