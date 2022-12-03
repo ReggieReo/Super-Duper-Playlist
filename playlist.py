@@ -8,8 +8,10 @@ from display import Display
 
 class Playlist:
 
+    __song: Song
+
     def __init__(self, name: str, database: "Playlistdb", display: "Display",
-                 song: "Song" = []):
+                 song=[]):
         self.__name = name
         self.__song = song
         self.__database = database
@@ -122,8 +124,119 @@ class Playlist:
         num_songs = len(self.__song)
         while True:
             user_input = int(input("PLease choose wanted song: "))
-            if 0 < user_input < num_songs:
-                print("Please input correct song's number")
+            if 0 < user_input <= num_songs:
+                url = self.__song[user_input - 1].url
                 break
-        url = self.__song[user_input - 1].url
+            print("Please input correct song's number")
         webbrowser.open(url)
+
+    def __current_song_information(self, editing_song):
+        self.__display.clear_screen()
+        print("Current song's information: ")
+        self.__display.draw_one_song(editing_song)
+        input("Press enter to continue: ")
+        self.__display.clear_screen()
+
+    def edit_song_info(self):
+        self.__display.draw_songs_table(self.__song)
+        while True:
+            selected_song = int(input("Please choose the song: "))
+            num_songs = len(self.__song)
+            if 0 < selected_song <= num_songs:
+                editing_song = self.__song[selected_song - 1]
+                break
+        while True:
+            self.__display.clear_screen()
+            print("You are editing: ")
+            self.__display.draw_one_song(editing_song)
+            self.__display.edit_song_menu()
+            wanted_edit = input("Press choose what to edit: ")
+            if wanted_edit == "1":
+                while True:
+                    try:
+                        self.__display.clear_screen()
+                        print("You are editing this song's name: ")
+                        self.__display.draw_one_song(editing_song)
+                        new_name = input("Please input new song's name: ")
+                        editing_song.name = new_name
+                        self.__current_song_information(editing_song)
+                        break
+                    except TypeError:
+                        print("Name must be string type variable")
+                        input("Press enter to continue: ")
+            elif wanted_edit == "2":
+                while True:
+                    try:
+                        self.__display.clear_screen()
+                        print("You are editing this song's artist: ")
+                        self.__display.draw_one_song(editing_song)
+                        new_artist = input("Please input new song's artist: ")
+                        editing_song.artist = new_artist
+                        self.__current_song_information(editing_song)
+                        break
+                    except TypeError:
+                        print("Artist must be string type variable")
+                        input("Press enter to continue: ")
+            elif wanted_edit == "3":
+                while True:
+                    try:
+                        self.__display.clear_screen()
+                        print("You are editing this song's duration: ")
+                        self.__display.draw_one_song(editing_song)
+                        new_duration = input("Please input new song's "
+                                             "duration: ")
+                        editing_song.duration = new_duration
+                        self.__current_song_information(editing_song)
+                        break
+                    except TypeError:
+                        print("Duration must be string type variable "
+                              "and in this form 3:21")
+                        input("Press enter to continue: ")
+            elif wanted_edit == "4":
+                while True:
+                    try:
+                        self.__display.clear_screen()
+                        print("You are editing this song's language: ")
+                        self.__display.draw_one_song(editing_song)
+                        new_language = input("Please input new song's "
+                                             "language: ")
+                        editing_song.language = new_language
+                        self.__current_song_information(editing_song)
+                        break
+                    except TypeError:
+                        print("Language must be string type variable")
+                        input("Press enter to continue: ")
+            elif wanted_edit == "5":
+                while True:
+                    try:
+                        self.__display.clear_screen()
+                        print("You are editing this song's url: ")
+                        self.__display.draw_one_song(editing_song)
+                        new_url = input("Please input new song's url: ")
+                        editing_song.url = new_url
+                        self.__current_song_information(editing_song)
+                        break
+                    except TypeError:
+                        print("Url must be string type variable")
+                        input("Press enter to continue: ")
+            elif wanted_edit == "6":
+                while True:
+                    try:
+                        self.__display.clear_screen()
+                        print("You are editing this song's rating: ")
+                        self.__display.draw_one_song(editing_song)
+                        new_rating = float(input("Please input new "
+                                                 "song's rating: "))
+                        editing_song.rating = new_rating
+                        self.__current_song_information(editing_song)
+                        break
+                    except TypeError:
+                        print("Rating of song must be float type")
+                        input("Press enter to continue: ")
+            elif wanted_edit == "7":
+                break
+            else:
+                print("Please input a valid function.")
+                input("Press enter to continue: ")
+        self.__database.initialize(self)
+        self.__display.clear_screen()
