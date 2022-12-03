@@ -149,7 +149,7 @@ class Playlist:
             self.__display.clear_screen()
             print("You are editing: ")
             self.__display.draw_one_song(editing_song)
-            self.__display.edit_song_menu()
+            self.__display.draw_edit_song_menu()
             wanted_edit = input("Press choose what to edit: ")
             if wanted_edit == "1":
                 while True:
@@ -240,3 +240,28 @@ class Playlist:
                 input("Press enter to continue: ")
         self.__database.initialize(self)
         self.__display.clear_screen()
+
+    def share_song(self):
+        self.__display.draw_share_song_menu()
+        while True:
+            self.__display.draw_songs_table(self.__song)
+            selected_song_menu = input("Please choose wanted function: ")
+            if selected_song_menu == "1":
+                self.__display.clear_screen()
+                while True:
+                    selected_song = int(input("Please choose the song: "))
+                    num_songs = len(self.__song)
+                    if 0 < selected_song <= num_songs:
+                        share_song = self.__song[selected_song - 1]
+                        break
+                self.__display.clear_screen()
+                self.__display.draw_one_song(share_song)
+                input("Press enter to continue: ")
+                self.__display.clear_screen()
+                break
+            if selected_song_menu == "2":
+                self.__display.clear_screen()
+                self.__display.draw_songs_table(self.__song)
+                input("Press enter to continue: ")
+                self.__display.clear_screen()
+                break
