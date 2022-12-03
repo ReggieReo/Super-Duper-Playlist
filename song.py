@@ -15,7 +15,7 @@ class Song:
 
     @name.setter
     def name(self, new_name):
-        if not isinstance(new_name, str):
+        if not isinstance(new_name, str) or new_name == "":
             raise TypeError("name must be string type variable")
         self.__name = new_name
 
@@ -25,7 +25,7 @@ class Song:
 
     @artist.setter
     def artist(self, new_artist):
-        if not isinstance(new_artist, str):
+        if not isinstance(new_artist, str) or new_artist == "":
             raise TypeError("artist must be string type variable")
         self.__artist = new_artist
 
@@ -47,6 +47,8 @@ class Song:
     def language(self, new_language):
         if not isinstance(new_language, str):
             raise TypeError("language of song must be string type")
+        if new_language == "":
+            new_language = "None"
         self.__language = new_language
 
     @property
@@ -55,8 +57,10 @@ class Song:
 
     @url.setter
     def url(self, new_url):
-        if not isinstance(new_url, str):
+        if not isinstance(new_url, str) or "https" not in new_url:
             raise TypeError("url of song must be string type")
+        if new_url == "":
+            new_url = "None"
         self.__url = new_url
 
     @property
