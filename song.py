@@ -35,7 +35,7 @@ class Song:
 
     @duration.setter
     def duration(self, new_duration):
-        if not isinstance(new_duration, str):
+        if not isinstance(new_duration, str) or ":" not in new_duration:
             raise TypeError("duration of song must be string type")
         self.__duration = new_duration
 
