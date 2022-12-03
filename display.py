@@ -74,7 +74,7 @@ class Display:
         print(table)
 
     @staticmethod
-    def edit_song_menu():
+    def draw_edit_song_menu():
         table = PrettyTable()
         table.field_names = ["#", "Function"]
         table.add_rows([["1", "Edit song's name"],
@@ -84,6 +84,15 @@ class Display:
                         ["5", "Edit song's url"],
                         ["6", "Edit song's rating"],
                         ["7", "Stop editing"]])
+        table.align["Function"] = "l"
+        print(table)
+
+    @staticmethod
+    def draw_share_song_menu():
+        table = PrettyTable()
+        table.field_names = ["#", "Function"]
+        table.add_rows([["1", "Share single song"],
+                        ["2", "Share all song"]])
         table.align["Function"] = "l"
         print(table)
 
