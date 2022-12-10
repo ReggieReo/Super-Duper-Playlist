@@ -1,10 +1,9 @@
 class Song:
 
-    def __init__(self, name: str, artist: str, duration: str,
-                 language: str = "None", url: str = "None"):
+    def __init__(self, name: str, artist: str, language: str = "None",
+                 url: str = "None"):
         self.__name = name
         self.__artist = artist
-        self.__duration = duration
         self.__language = language
         self.__url = url
         self.__rating = 0
@@ -28,16 +27,6 @@ class Song:
         if not isinstance(new_artist, str) or new_artist == "":
             raise TypeError("artist must be string type variable")
         self.__artist = new_artist
-
-    @property
-    def duration(self):
-        return self.__duration
-
-    @duration.setter
-    def duration(self, new_duration):
-        if not isinstance(new_duration, str) or ":" not in new_duration:
-            raise TypeError("duration of song must be string type")
-        self.__duration = new_duration
 
     @property
     def language(self):
@@ -69,8 +58,8 @@ class Song:
 
     @rating.setter
     def rating(self, new_rating):
-        if not isinstance(new_rating, float) or \
+        if not isinstance(new_rating, (float, int)) or \
                 new_rating < 0 or \
                 new_rating > 5:
-            raise TypeError("rating of song must be float type")
-        self.__rating = new_rating
+            raise TypeError("rating of song must be float or integer type")
+        self.__rating = int(new_rating)

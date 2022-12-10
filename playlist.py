@@ -7,7 +7,6 @@ from display import Display
 
 
 class Playlist:
-
     __song: Song
 
     def __init__(self, name: str, database: "Playlistdb", display: "Display",
@@ -35,8 +34,12 @@ class Playlist:
         return self.__display
 
     def delete_song(self):
-        wanted_date = input("Please input wanted song name: ")
-        self.__database.delete_song(self, wanted_date)
+        self.__display.draw_songs_table(self.__song)
+        wanted_delete = input("Please input wanted song name (Name): ")
+        for index, song in enumerate(self.__song):
+            if song.name == wanted_delete:
+                self.__song.pop(index)
+        self.__database.delete_song(self, wanted_delete)
 
     def add_song(self):
         while True:
@@ -51,12 +54,6 @@ class Playlist:
                 break
             print("Artist's name must be string")
             continue
-        while True:
-            duration = input("Please input song name EX(3:21): ")
-            if ":" not in duration or not isinstance(duration, str):
-                print("Incorrect duration format, Please Try again")
-                continue
-            break
         while True:
             language = input("Please input song language (not required): ")
             if isinstance(language, str):
@@ -73,7 +70,7 @@ class Playlist:
                 break
             print("url must be string")
             continue
-        new_song = Song(song_name, artist, duration, language, url)
+        new_song = Song(song_name, artist, language, url)
         self.__display.clear_screen()
         self.__display.draw_one_song(new_song)
         user_input = input("Press enter to confirm: ")
@@ -104,11 +101,15 @@ class Playlist:
                 print("Song's number must be int and between 1 to 3")
                 continue
             break
+        song_url = f'https://youtu.be/' \
+                   f'{results[user_input - 1]["url_suffix"].split("=")[1]}'
         new_song = Song(results[user_input - 1]["title"],
                         results[user_input - 1]["channel"],
-                        results[user_input - 1]["duration"])
+                        url=song_url)
         self.__song.append(new_song)
         self.__database.initialize(self)
+        print(f"{new_song.name} is added to {self.__name}")
+        input("Press enter to continue: ")
 
     def delete_all_songs(self):
         self.__song = []
@@ -123,7 +124,12 @@ class Playlist:
         self.__display.draw_songs_table(self.__song)
         num_songs = len(self.__song)
         while True:
-            user_input = int(input("PLease choose wanted song: "))
+            try:
+                user_input = int(input("PLease choose wanted song (#): "))
+            except ValueError:
+                print("Please input song in integer format.")
+                input("Press enter to continue: ")
+                continue
             if 0 < user_input <= num_songs:
                 url = self.__song[user_input - 1].url
                 break
@@ -138,9 +144,15 @@ class Playlist:
         self.__display.clear_screen()
 
     def edit_song_info(self):
-        self.__display.draw_songs_table(self.__song)
         while True:
-            selected_song = int(input("Please choose the song: "))
+            self.__display.clear_screen()
+            self.__display.draw_songs_table(self.__song)
+            try:
+                selected_song = int(input("Please choose the song (#): "))
+            except ValueError:
+                print("Please input song in integer type.")
+                input("Press enter to continue: ")
+                continue
             num_songs = len(self.__song)
             if 0 < selected_song <= num_songs:
                 editing_song = self.__song[selected_song - 1]
@@ -150,7 +162,7 @@ class Playlist:
             print("You are editing: ")
             self.__display.draw_one_song(editing_song)
             self.__display.draw_edit_song_menu()
-            wanted_edit = input("Press choose what to edit: ")
+            wanted_edit = input("Press choose what to edit (#): ")
             if wanted_edit == "1":
                 while True:
                     try:
@@ -181,21 +193,6 @@ class Playlist:
                 while True:
                     try:
                         self.__display.clear_screen()
-                        print("You are editing this song's duration: ")
-                        self.__display.draw_one_song(editing_song)
-                        new_duration = input("Please input new song's "
-                                             "duration: ")
-                        editing_song.duration = new_duration
-                        self.__current_song_information(editing_song)
-                        break
-                    except TypeError:
-                        print("Duration must be string type variable "
-                              "and in this form 3:21")
-                        input("Press enter to continue: ")
-            elif wanted_edit == "4":
-                while True:
-                    try:
-                        self.__display.clear_screen()
                         print("You are editing this song's language: ")
                         self.__display.draw_one_song(editing_song)
                         new_language = input("Please input new song's "
@@ -206,7 +203,7 @@ class Playlist:
                     except TypeError:
                         print("Language must be string type variable")
                         input("Press enter to continue: ")
-            elif wanted_edit == "5":
+            elif wanted_edit == "4":
                 while True:
                     try:
                         self.__display.clear_screen()
@@ -219,7 +216,7 @@ class Playlist:
                     except TypeError:
                         print("Url must be string type variable")
                         input("Press enter to continue: ")
-            elif wanted_edit == "6":
+            elif wanted_edit == "5":
                 while True:
                     try:
                         self.__display.clear_screen()
@@ -230,10 +227,11 @@ class Playlist:
                         editing_song.rating = new_rating
                         self.__current_song_information(editing_song)
                         break
-                    except TypeError:
-                        print("Rating of song must be float type")
+                    except ValueError:
+                        print("Rating of song must be integer or float type "
+                              "and between 0 to 5.")
                         input("Press enter to continue: ")
-            elif wanted_edit == "7":
+            elif wanted_edit == "6":
                 break
             else:
                 print("Please input a valid function.")
@@ -242,14 +240,19 @@ class Playlist:
         self.__display.clear_screen()
 
     def share_song(self):
-        self.__display.draw_share_song_menu()
         while True:
-            self.__display.draw_songs_table(self.__song)
+            self.__display.draw_share_song_menu()
             selected_song_menu = input("Please choose wanted function: ")
             if selected_song_menu == "1":
                 self.__display.clear_screen()
+                self.__display.draw_songs_table(self.__song)
                 while True:
-                    selected_song = int(input("Please choose the song: "))
+                    try:
+                        selected_song = int(input("Please choose the song: "))
+                    except ValueError:
+                        print("Please input song in integer type:")
+                        input("Press enter to continue: ")
+                        continue
                     num_songs = len(self.__song)
                     if 0 < selected_song <= num_songs:
                         share_song = self.__song[selected_song - 1]
@@ -265,3 +268,6 @@ class Playlist:
                 input("Press enter to continue: ")
                 self.__display.clear_screen()
                 break
+            print("Please input correct function: ")
+            input("Enter to continue")
+            self.__display.clear_screen()

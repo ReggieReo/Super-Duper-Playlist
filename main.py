@@ -6,8 +6,8 @@ DISPLAY = Display()
 
 def read_first_menu():
     while True:
-        user_input = input("Please choose wanted function: ")
-        if user_input in ["1", "2", "3"] and isinstance(user_input, str):
+        user_input = input("Please choose wanted function (#): ")
+        if user_input in ["1", "2", "3", "4"] and isinstance(user_input, str):
             return user_input
         print("Please choose exist function: ")
         input("Press enter to continue: ")
@@ -19,7 +19,7 @@ def read_wanted_playlist():
     names_playlist = DATA.get_playlist_info()
     while True:
         try:
-            playlist_name = input("Please choose a wanted playlist: ")
+            playlist_name = input("Please choose a wanted playlist (Name): ")
             wanted_names_playlist = names_playlist[playlist_name]
         except KeyError:
             print("The playlist doesn't exist")
@@ -49,7 +49,6 @@ def first_menu():
             for songs_name, song_info in playlist_songs.items():
                 temp_song = Song(songs_name,
                                  song_info["artist"],
-                                 song_info["duration"],
                                  song_info["language"],
                                  song_info["url"])
                 temp_song.rating = float(song_info["rating"])
@@ -78,12 +77,19 @@ def first_menu():
                     input("Press enter to continue: ")
                     break
                 DISPLAY.clear_screen()
+        if user_input == "4":
+            DISPLAY.clear_screen()
+            playlist_info = DATA.get_playlist_info()
+            DISPLAY.draw_all_playlist(playlist_info)
+            playlist_name = input("Please input playlist's name :")
+            DATA.delete_playlist(playlist_name)
+            DISPLAY.clear_screen()
     return opened_playlist
 
 
 def read_opened_playlist_menu():
     while True:
-        user_input = input("Please choose wanted function: ")
+        user_input = input("Please choose wanted function (#): ")
         if user_input in ["1", "2", "3", "4", "5", "6"] \
                 and isinstance(user_input, str):
             return user_input
@@ -95,7 +101,7 @@ def read_opened_playlist_menu():
 
 def read_add_song():
     while True:
-        user_input = input("Please choose wanted function: ")
+        user_input = input("Please choose wanted function (#): ")
         if user_input in ["1", "2"] and isinstance(user_input, str):
             return user_input
         print("Please choose exist function. ")
