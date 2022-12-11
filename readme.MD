@@ -22,22 +22,24 @@ User can freely create, delete, or open the playlist. After the user open a play
 
 ***
 ##  Features
- !["First menu"](Images/First menu.png)
+
+<img src="Images/First menu.png" width="200">
 
 ### See all playlist
-* Program will display all the playlist that are saved in playlist.json
-!["Show all playlist"](Images/Show all playlist.png)
+* Program will display all the playlist that are saved in playlist.json  
+<img src="Images/Show all playlist.png" width="200">
 
 ### Create a new playlist
-* Program will let the user create a playlist
-!["Create a playlist"](Images/Create a playlist.png)
+* Program will let the user create a playlist  
+<img src="Images/Create a playlist.png" width="200">
+
 
 ### Delete a playlist
-* Program will let the user delete a playlist
-!["Delete a playlist"](Images/Delete a playlist.png)
+* Program will let the user delete a playlist  
+<img src="Images/Delete a playlist.png" width="200">
 
 ### Open a playlist
-* Program will let the user choose to open one playlist, and the additional menu will appear.
-![After open playlist menu](Images/After open playlist menu.png)
-![Get all song info](Images/Get all song info.png)
+* Program will let the user choose to open one playlist, and the additional menu will appear.  
+<img src="Images/After open playlist menu.png" width="200">  
+<img src="Images/Get all song info.png" width="200">  
 
