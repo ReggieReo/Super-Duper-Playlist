@@ -1,7 +1,20 @@
 class Song:
+    """
+        This class contains all of a song's information that will pass on
+    and be used in the playlist class.
+    """
 
     def __init__(self, name: str, artist: str, language: str = "None",
                  url: str = "None"):
+        """
+        Attribute of a song class.
+
+        name: the name of the song.
+        artist: the artist that wrote the song.
+        language: the language, which the song is written in.
+        url: the YouTube or other music provider url of the song.
+        rating: the rating out of 5 of the song.
+        """
         self.__name = name
         self.__artist = artist
         self.__language = language
@@ -10,6 +23,9 @@ class Song:
 
     @property
     def name(self):
+        """
+        Getter and setter of the attribute name.
+        """
         return self.__name
 
     @name.setter
@@ -20,6 +36,9 @@ class Song:
 
     @property
     def artist(self):
+        """
+        Getter and setter of the attribute artist.
+        """
         return self.__artist
 
     @artist.setter
@@ -30,6 +49,9 @@ class Song:
 
     @property
     def language(self):
+        """
+        Getter and setter of the attribute language.
+        """
         return self.__language
 
     @language.setter
@@ -42,6 +64,9 @@ class Song:
 
     @property
     def url(self):
+        """
+        Getter and setter of the attribute url.
+        """
         return self.__url
 
     @url.setter
@@ -54,6 +79,9 @@ class Song:
 
     @property
     def rating(self):
+        """
+        Getter and setter of the attribute rating.
+        """
         return self.__rating
 
     @rating.setter

@@ -5,10 +5,14 @@ DISPLAY = Display()
 
 
 def read_first_menu():
+    """
+    Reading the user input for the first meny and returning it.
+    """
     while True:
-        user_input = input("Please choose wanted function (#): ")
-        if user_input in ["1", "2", "3", "4"] and isinstance(user_input, str):
-            return user_input
+        first_function = input("Please choose wanted function (#): ")
+        if first_function in ["1", "2", "3", "4"] and \
+                isinstance(first_function, str):
+            return first_function
         print("Please choose exist function: ")
         input("Press enter to continue: ")
         DISPLAY.clear_screen()
@@ -16,6 +20,10 @@ def read_first_menu():
 
 
 def read_wanted_playlist():
+    """
+    Reading the user wanted playlist, check if the playlist exist,
+    and return it to the user.
+    """
     names_playlist = DATA.get_playlist_info()
     while True:
         try:
@@ -31,6 +39,10 @@ def read_wanted_playlist():
 
 
 def first_menu():
+    """
+    The first menu when user open the program, which contains See all
+    playlists, Open a playlist, Created a new playlist, and Delete a playlist.
+    """
     while True:
         DISPLAY.draw_first_menu()
         user_input = read_first_menu()
@@ -67,8 +79,8 @@ def first_menu():
                 playlist = Playlist(playlist_name, DATA, DISPLAY)
                 print("Do you want to insert a song ?")
                 while True:
-                    user_input = input("Enter y to insert a song: ")
-                    if user_input == "y":
+                    want_insert_song = input("Enter y to insert a song: ")
+                    if want_insert_song == "y":
                         playlist.add_song()
                         print(f"{playlist_name} is created.")
                         input("Press enter to continue: ")
@@ -88,11 +100,15 @@ def first_menu():
 
 
 def read_opened_playlist_menu():
+    """
+    Read the user input for the program's function for the playlist. If the
+    user choose correct function return it.
+    """
     while True:
-        user_input = input("Please choose wanted function (#): ")
-        if user_input in ["1", "2", "3", "4", "5", "6"] \
-                and isinstance(user_input, str):
-            return user_input
+        playlist_function = input("Please choose wanted function (#): ")
+        if playlist_function in ["1", "2", "3", "4", "5", "6"] \
+                and isinstance(playlist_function, str):
+            return playlist_function
         print("Please choose exist function. ")
         input("Press enter to continue: ")
         DISPLAY.clear_screen()
@@ -100,10 +116,15 @@ def read_opened_playlist_menu():
 
 
 def read_add_song():
+    """
+    Read the user choice for adding a song. If "1" the user will add the song
+    manually, and if "2" user will let the program search for the song.
+    """
     while True:
-        user_input = input("Please choose wanted function (#): ")
-        if user_input in ["1", "2"] and isinstance(user_input, str):
-            return user_input
+        add_song_function = input("Please choose wanted function (#): ")
+        if add_song_function in ["1", "2"] and \
+                isinstance(add_song_function, str):
+            return add_song_function
         print("Please choose exist function. ")
         input("Press enter to continue: ")
         DISPLAY.clear_screen()
@@ -111,14 +132,19 @@ def read_add_song():
 
 
 def opened_playlist_menu(opened_playlist):
+    """
+    This is a menu after user open a playlist, which contains Play a song,
+    Add a song, Delete songs, Edit song's information, Get song's information,
+    and Close this playlist.
+    """
     while True:
         DISPLAY.draw_opened_menu()
-        user_input = read_opened_playlist_menu()
-        if user_input == "1":
+        playlist_function = read_opened_playlist_menu()
+        if playlist_function == "1":
             DISPLAY.clear_screen()
             opened_playlist.play_a_song()
             DISPLAY.clear_screen()
-        if user_input == "2":
+        if playlist_function == "2":
             DISPLAY.clear_screen()
             DISPLAY.draw_add_song()
             user_add_song = read_add_song()
@@ -131,23 +157,26 @@ def opened_playlist_menu(opened_playlist):
                 opened_playlist.auto_add_song()
                 DISPLAY.clear_screen()
             DISPLAY.clear_screen()
-        if user_input == "3":
+        if playlist_function == "3":
             DISPLAY.clear_screen()
             opened_playlist.delete_song()
             DISPLAY.clear_screen()
-        if user_input == "4":
+        if playlist_function == "4":
             DISPLAY.clear_screen()
             opened_playlist.edit_song_info()
             DISPLAY.clear_screen()
-        if user_input == "5":
+        if playlist_function == "5":
             DISPLAY.clear_screen()
             opened_playlist.share_song()
             DISPLAY.clear_screen()
-        if user_input == "6":
+        if playlist_function == "6":
             break
 
 
 def main():
+    """
+    The main script for running the program
+    """
     DISPLAY.clear_screen()
     opened_playlist = first_menu()
     opened_playlist_menu(opened_playlist)
@@ -156,7 +185,7 @@ def main():
 if __name__ == "__main__":
     while True:
         main()
-        user_input = input("Do you want to close a program (q to close): ")
-        if user_input == "q" or user_input == "Q":
+        quit_program = input("Do you want to close a program (q to close): ")
+        if quit_program in ('q', 'Q'):
             break
         DISPLAY.clear_screen()

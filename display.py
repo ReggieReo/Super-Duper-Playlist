@@ -1,11 +1,18 @@
-from prettytable import PrettyTable
 from os import system, name
+from prettytable import PrettyTable
 
 
 class Display:
+    """
+    This class is used for drawing menu, or given information into a table.
+    """
 
     @staticmethod
     def draw_songs_table(list_songs: ["Song"]):
+        """
+        From the given list of songs object draw a table contains all songs'
+        information.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Song's name", "Artist",
                              "Language", "url", "Rating"]
@@ -16,6 +23,10 @@ class Display:
 
     @staticmethod
     def draw_one_song(song: "Song"):
+        """
+        From the given song object draw a table contains all song's
+        information.
+        """
         table = PrettyTable()
         table.field_names = ["Song's name", "Artist", "Language", "url",
                              "Rating"]
@@ -25,6 +36,10 @@ class Display:
 
     @staticmethod
     def draw_songs_table_youtube(search_result):
+        """
+        From the search result, which is YouTube search result. Draw 3 songs'
+        information that will let the user choose later.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Song's name", "Artist"]
         for index, song in enumerate(search_result):
@@ -34,6 +49,10 @@ class Display:
 
     @staticmethod
     def draw_all_playlist(database: "Playlistdb"):
+        """
+        Get the data from the playlist database's method and draw all playlist
+        contains in playlist.json.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Playlist's name"]
         for index, playlist_name in enumerate(database.keys()):
@@ -42,6 +61,9 @@ class Display:
 
     @staticmethod
     def draw_first_menu():
+        """
+        Drawing the first menu when user open the program.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Function"]
         table.add_rows([["1", "See all playlists"],
@@ -53,6 +75,9 @@ class Display:
 
     @staticmethod
     def draw_opened_menu():
+        """
+        Drawing a menu after user chose to open a playlist.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Function"]
         table.add_rows([["1", "Play a song"],
@@ -66,6 +91,9 @@ class Display:
 
     @staticmethod
     def draw_add_song():
+        """
+        Drawing a table for the adding song menu.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Function"]
         table.add_rows([["1", "Add a song"],
@@ -75,6 +103,9 @@ class Display:
 
     @staticmethod
     def draw_edit_song_menu():
+        """
+        Drawing a table for the editing song's information menu.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Function"]
         table.add_rows([["1", "Edit song's name"],
@@ -88,6 +119,9 @@ class Display:
 
     @staticmethod
     def draw_share_song_menu():
+        """
+        Drawing a table for the sharing song menu.
+        """
         table = PrettyTable()
         table.field_names = ["#", "Function"]
         table.add_rows([["1", "Share single song"],
@@ -97,6 +131,9 @@ class Display:
 
     @staticmethod
     def clear_screen():
+        """
+        Clear the terminal screen.
+        """
         # for windows
         if name == 'nt':
             system('cls')
