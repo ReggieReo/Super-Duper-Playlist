@@ -1,0 +1,70 @@
+{
+    "J Pop": {
+        "Balance": {
+            "artist": "LUCKY TAPES",
+            "language": "Japaneses",
+            "url": "https://youtu.be/AIyMw0EuBcI",
+            "rating": 0
+        },
+        "me me she": {
+            "artist": "RADWIMPS",
+            "language": "Japanese",
+            "url": "https://youtu.be/wvvItrHEfRA",
+            "rating": 0
+        },
+        "First Love": {
+            "artist": "Hikaru Utada",
+            "language": "Japanese",
+            "url": "https://youtu.be/vbVhaTpAJmM",
+            "rating": 0
+        }
+    },
+    "J Rock": {
+        "first death": {
+            "artist": "TK from Ling tosite sigure",
+            "language": "Japanese",
+            "url": "https://youtu.be/KrN3r5Jnih0",
+            "rating": 0
+        },
+        "Guitar, Loneliness and Blue Planet": {
+            "artist": "kessoku band",
+            "language": "Japanese",
+            "url": "https://youtu.be/SDk1RA4g8CA",
+            "rating": 0
+        },
+        "Tokyo Shandy Rendez-vous": {
+            "artist": "KAF",
+            "language": "Japanese",
+            "url": "https://youtu.be/D1xBm10MkgA",
+            "rating": 0
+        }
+    },
+    "ThaiThai": {
+        "I Want You": {
+            "artist": "POLYCAT",
+            "language": "Thai",
+            "url": "https://youtu.be/19UjyhKY7eA",
+            "rating": 0
+        },
+        "17": {
+            "artist": "Dept",
+            "language": "Thai",
+            "url": "https://youtu.be/4qpnsDu4pc0",
+            "rating": 0
+        }
+    },
+    "Eng Jing": {
+        "I Really Want to Stay At Your House": {
+            "artist": "Rosa Walton",
+            "language": "English",
+            "url": "https://youtu.be/h4VJGNNSQnw",
+            "rating": 0
+        },
+        "Weight of the World": {
+            "artist": "Keiichi Okabe",
+            "language": "English",
+            "url": "https://youtu.be/ToBQY630PZE",
+            "rating": 0
+        }
+    }
+}
