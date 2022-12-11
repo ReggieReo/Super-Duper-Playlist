@@ -24,7 +24,7 @@ class Playlistdb:
                 print("Created playlists.json")
 
     @staticmethod
-    def __make_song_dicts(playlist: "Plalist"):
+    def __make_song_dicts(playlist: "Playlist"):
         """
         This method is used for turning list of Song class into dict, so it can
         be used to save into playlists.json.

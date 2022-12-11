@@ -149,21 +149,6 @@ class Playlist:
         print(f"{new_song.name} is added to {self.__name}")
         input("Press enter to continue: ")
 
-    def delete_all_songs(self):
-        """
-        Delete all the song in the playlist.
-        """
-        self.__song = []
-        self.__database.initialize(self)
-        print("All songs are deleted")
-
-    def shuffle_songs(self):
-        """
-        Shuffle the order of the song.
-        """
-        random.shuffle(self.__song)
-        self.__database.initialize(self)
-
     def play_a_song(self):
         """
         Play the song from the user choice in the browser.
