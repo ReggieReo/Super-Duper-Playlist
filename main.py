@@ -47,12 +47,22 @@ def first_menu():
         DISPLAY.draw_first_menu()
         user_input = read_first_menu()
         if user_input == "1":
+            if DATA.get_playlist_info() == {}:
+                print("There isn't any playlist. Please create a playlist")
+                input("Enter to continue: ")
+                DISPLAY.clear_screen()
+                continue
             DISPLAY.clear_screen()
             playlist_info = DATA.get_playlist_info()
             DISPLAY.draw_all_playlist(playlist_info)
             input("Press enter to continue: ")
             DISPLAY.clear_screen()
         if user_input == "2":
+            if DATA.get_playlist_info() == {}:
+                print("There isn't any playlist. Please create a playlist")
+                input("Enter to continue: ")
+                DISPLAY.clear_screen()
+                continue
             DISPLAY.clear_screen()
             playlist_info = DATA.get_playlist_info()
             DISPLAY.draw_all_playlist(playlist_info)
@@ -90,6 +100,11 @@ def first_menu():
                     break
                 DISPLAY.clear_screen()
         if user_input == "4":
+            if DATA.get_playlist_info() == {}:
+                print("There isn't any playlist. Please create a playlist")
+                input("Enter to continue: ")
+                DISPLAY.clear_screen()
+                continue
             DISPLAY.clear_screen()
             playlist_info = DATA.get_playlist_info()
             DISPLAY.draw_all_playlist(playlist_info)
